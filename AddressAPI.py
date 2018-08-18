@@ -216,6 +216,7 @@ def get_params_by_address():
 
     address = request.args.get('address', default = '*', type = str)
     analogscount = request.args.get('analogscount', default = 10, type = int)
+    totalsquare = request.args.get('square', default = 100, type = float)
 
     sql = 'insert into user_actions (user_id, action, time, comment) values(' +\
         str(df['id'][0]) + ', 1, current_timestamp' + ', \'' +\
@@ -223,7 +224,8 @@ def get_params_by_address():
     cur.execute(sql)
     conn.commit()
     cur.close()
-    result = getparams(address, analogscount)
+
+    result = apilib.getparams(address, analogscount, totalsquare)
     return jsonify(
         result
     )
