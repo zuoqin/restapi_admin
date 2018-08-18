@@ -31,6 +31,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('full_name', 'short_name', 'email')}),
+        (_('API usage'), {'fields': ('requests_total', 'requests_per_month', 'requests_per_week', 'requests_per_day')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
@@ -49,6 +50,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     search_fields = ('username', 'full_name', 'short_name', 'email')
     ordering = ('username',)
     filter_horizontal = ('groups', 'user_permissions',)
+    readonly_fields = ('requests_per_month', 'requests_per_week', 'requests_per_day', 'requests_total')
 
     def get_fieldsets(self, request, obj=None):
         if not obj:

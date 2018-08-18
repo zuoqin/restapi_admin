@@ -37,6 +37,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
                                                 'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
+    requests_per_month =  models.IntegerField(_('requests_per_month'), default=0)
+    requests_per_day = models.IntegerField(_('requests_per_day'), default=0)
+    requests_per_week = models.IntegerField(_('requests_per_week'), default=0)
+    requests_total = models.IntegerField(_('requests_total'),default=0)
+
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
