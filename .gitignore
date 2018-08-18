@@ -1,6 +1,6 @@
 # Python bytecode
 *.py[co]
-
+.idea/
 # Packages
 *.egg*
 dist
