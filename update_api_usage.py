@@ -27,7 +27,7 @@ for index, row in df.iterrows():
     sql = 'select count(user_id) as cnt from user_actions where time > \'' + dt.strftime('%d.%m.%Y %H:%M:%S') +\
            '\' and user_id=' + str(row['id'])
     df_cnt = pd.read_sql(sql, con=conn)
-    sql = 'update accounts_customuser set requests_per_day =' + str(df_cnt['cnt'][0]) + ' where id = ' +\
+    sql = 'update accounts_customuser set requests_per_week =' + str(df_cnt['cnt'][0]) + ' where id = ' +\
         str(row['id'])
     cur.execute(sql)
 
@@ -35,7 +35,7 @@ for index, row in df.iterrows():
     sql = 'select count(user_id) as cnt from user_actions where time > \'' + dt.strftime('%d.%m.%Y %H:%M:%S') +\
            '\' and user_id=' + str(row['id'])
     df_cnt = pd.read_sql(sql, con=conn)
-    sql = 'update accounts_customuser set requests_per_day =' + str(df_cnt['cnt'][0]) + ' where id = ' +\
+    sql = 'update accounts_customuser set requests_per_month =' + str(df_cnt['cnt'][0]) + ' where id = ' +\
         str(row['id'])
     cur.execute(sql)
 
