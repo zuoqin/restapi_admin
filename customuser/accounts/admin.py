@@ -32,8 +32,7 @@ class CustomUserAdmin(admin.ModelAdmin):
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('full_name', 'short_name', 'email')}),
         (_('API usage'), {'fields': ('requests_total', 'requests_per_month', 'requests_per_week', 'requests_per_day')}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'groups', 'user_permissions')}),
+        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
@@ -46,10 +45,10 @@ class CustomUserAdmin(admin.ModelAdmin):
     add_form = CustomUserCreationForm
     change_password_form = AdminPasswordChangeForm
     list_display = ('username', 'email', 'full_name', 'short_name', 'is_staff')
-    list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
+    list_filter = ('is_staff', 'is_superuser', 'is_active')
     search_fields = ('username', 'full_name', 'short_name', 'email')
     ordering = ('username',)
-    filter_horizontal = ('groups', 'user_permissions',)
+    filter_horizontal = ('user_permissions',)
     readonly_fields = ('requests_per_month', 'requests_per_week', 'requests_per_day', 'requests_total')
 
     def get_fieldsets(self, request, obj=None):

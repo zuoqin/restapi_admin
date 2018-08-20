@@ -62,7 +62,6 @@ def get_appraisal(lat, lon, totalarea, buildingtype, buildingyear, analogscount)
 
     if os.path.isfile(dffile):
         data = pickle.load(open(dffile, "rb"))
-    print(1, region)
     if os.path.isfile(filename):
         neigh = pickle.load(open(filename, "rb"))
     else:
@@ -122,7 +121,6 @@ def get_appraisal(lat, lon, totalarea, buildingtype, buildingyear, analogscount)
         neigh.fit(X)
         pickle.dump(neigh, open(filename, "wb"))
 
-    print(33333333)
     std = data['stdlat']
     mean = data['medlat']
     newlat = cd * (float(lat) - mean) / std
@@ -146,7 +144,6 @@ def get_appraisal(lat, lon, totalarea, buildingtype, buildingyear, analogscount)
     newprice = 0.0
 
     res = neigh.kneighbors([[newlat, newlon, newtotalarea, newbuildingtype, newbuildingyear, newprice]])
-    print(44444444)
     wstr = ''
     for i in range(len(res[1][0])):
         if len(wstr) > 0:
@@ -221,7 +218,6 @@ def get_appraisal(lat, lon, totalarea, buildingtype, buildingyear, analogscount)
         calcanalogs.append([housetype, price, totalsquare, city, lat, lon, id, roomsnum,
                             storey, storeysnum, fulladdress, district, repair, buildingyear, leavingsquare,
                             kitchensquare, metrodistance, analogstatus, analogindex, screenshot])
-    print(55555555)
     sql = 'select AVG ("Price"/"TotalArea") as price from "newParsers2" where "Region" = \'' + region + '\'' +\
         ' and "Price" is not NULL and "Price" > 1000 and "TotalArea" is not NULL and "TotalArea" > 10'
     df_price = pd.read_sql(sql, con=conn)
