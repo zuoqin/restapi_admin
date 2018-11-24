@@ -244,6 +244,7 @@ def get_appraisal(lat, lon, totalarea, buildingtype, buildingyear, analogscount)
               'regionAvrgPrice': regionAvrgPrice, 'cityAvrgPrice': cityAvrgPrice,
               'data': df['pricepermetr'].median() * totalarea,
               'calcanalogs': calcanalogs}
+    conn.close()
     return result
 
 
@@ -470,10 +471,11 @@ def getparams(address, analogscount, objsquare=100):
             req.add_header('Content-Type', 'application/json; charset=utf-8')
             contents = urllib.request.urlopen(req).read()
             result = json.loads(contents.decode('utf-8'))
-
             square = result['parcelData']['areaValue']
             cadCost = result['parcelData']['cadCost']
             cadNomer = objectId
+            if square < 0.01:
+                square = objsquare
         else:
             square = objsquare
             cadCost = 0.01
