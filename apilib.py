@@ -465,15 +465,20 @@ def getparams(address, analogscount, objsquare=100):
             result = json.loads(contents.decode('utf-8'))
 
         if len(result) > 0:
-            objectId = result[0]['objectId']
-            rosreestr_url = 'http://rosreestr.ru/api/online/fir_object/' + objectId
-            req = urllib.request.Request(rosreestr_url)
-            req.add_header('Content-Type', 'application/json; charset=utf-8')
-            contents = urllib.request.urlopen(req).read()
-            result = json.loads(contents.decode('utf-8'))
-            square = result['parcelData']['areaValue']
-            cadCost = result['parcelData']['cadCost']
-            cadNomer = objectId
+            try:
+                objectId = result[0]['objectId']
+                rosreestr_url = 'http://rosreestr.ru/api/online/fir_object/' + objectId
+                req = urllib.request.Request(rosreestr_url)
+                req.add_header('Content-Type', 'application/json; charset=utf-8')
+                contents = urllib.request.urlopen(req).read()
+                result = json.loads(contents.decode('utf-8'))
+                square = result['parcelData']['areaValue']
+                cadCost = result['parcelData']['cadCost']
+                cadNomer = objectId
+            except Exception as e:
+                square = 0.0
+                cadCost = 0.01
+                cadNomer = ''
             if square < 0.01:
                 square = objsquare
         else:
