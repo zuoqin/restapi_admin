@@ -299,7 +299,8 @@ def getyandex(address):
     req = urllib.request.Request(yandex_url)
     contents = urllib.request.urlopen(req).read()
     result = json.loads(contents.decode('utf-8'))
-
+    house = ''
+    street_name = ''
     address = \
     result['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['metaDataProperty']['GeocoderMetaData'][
         'Address']['Components']
@@ -321,7 +322,10 @@ def getyandex(address):
     address = result['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['Point']['pos']
     longitude = address.split(' ')[0]
     latitude = address.split(' ')[1]
-    bindex = house.find('к')
+    if house is not None:
+        bindex = house.find('к')
+    else:
+       bindex = -1
     building = ''
     if bindex >= 0:
         building = house[(bindex + 1):]
