@@ -300,6 +300,7 @@ def getyandex(address):
     contents = urllib.request.urlopen(req).read()
     result = json.loads(contents.decode('utf-8'))
     house = ''
+    city = ''
     street_name = ''
     address = \
     result['response']['GeoObjectCollection']['featureMember'][0]['GeoObject']['metaDataProperty']['GeocoderMetaData'][
