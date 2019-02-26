@@ -343,8 +343,8 @@ def getdadata(address):
 
     req = urllib.request.Request(dadata_url)
     req.add_header('Content-Type', 'application/json; charset=utf-8')
-    req.add_header('X-Secret', 'd6bc0e31ee4b878691e051e7fb3ac1cd787fe7d9')
-    req.add_header('Authorization', 'Token 22a558542ffe2926bc0b384fa349ecad8885365b')
+    req.add_header('X-Secret', '7848d777e41199081323970dbbfa00f5a8e71b3b')
+    req.add_header('Authorization', 'Token 2ea0d7a2da0b9161f2106694203348ffd91a39df')
 
     jsondata = json.dumps(values)
     jsondataasbytes = jsondata.encode('utf-8')
